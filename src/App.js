@@ -7,7 +7,7 @@ import CardList from "./components/CardList";
 class App extends React.Component {
   state = {
     data: [],
-    friends: ["tetondan", "dustinmyers", "justsml", "luishrd", "bigknell"],
+    followers: [],
   };
 
   componentDidMount() {
@@ -19,13 +19,22 @@ class App extends React.Component {
       .catch((err) => {
         console.log(err);
       });
+
+    axios
+      .get("https://api.github.com/users/joshuascan/followers")
+      .then((res) => {
+        this.setState({ followers: res.data });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   render() {
     return (
-      <div>
+      <div className="container">
         <h1>Github User Cards</h1>
-        <CardList data={this.state.data} />
+        <CardList data={this.state.data} followers={this.state.followers} />
       </div>
     );
   }
