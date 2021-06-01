@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "./Card";
+import User from "./User";
 import Follower from "./Follower";
 
 class CardList extends React.Component {
@@ -8,7 +8,7 @@ class CardList extends React.Component {
     return (
       <div>
         <div className="card-container profile">
-          <Card data={this.props.data} />
+          <User data={this.props.data} />
         </div>
         <div className="followers">
           <h2>Followers</h2>
