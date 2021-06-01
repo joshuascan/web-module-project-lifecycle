@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 import "./App.css";
 
+import CardList from "./components/CardList";
+
 class App extends React.Component {
   state = {
     data: [],
@@ -23,6 +25,7 @@ class App extends React.Component {
     return (
       <div>
         <h1>Github User Cards</h1>
+        <CardList data={this.state.data} />
       </div>
     );
   }
