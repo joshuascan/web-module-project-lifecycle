@@ -8,6 +8,7 @@ class App extends React.Component {
   state = {
     data: [],
     followers: [],
+    user: "",
   };
 
   componentDidMount() {
@@ -30,10 +31,30 @@ class App extends React.Component {
       });
   }
 
+  handleChange = (e) => {
+    this.setState({ user: e.target.value });
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .get(`https://api.github.com/users/${this.state.user}`)
+      .then((res) => {
+        this.setState({ data: res.data });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   render() {
     return (
       <div className="container">
         <h1>Github User Cards</h1>
+        <form onSubmit={this.handleSubmit}>
+          <input value={this.state.user} onChange={this.handleChange}></input>
+          <button>Search for User</button>
+        </form>
         <CardList data={this.state.data} followers={this.state.followers} />
       </div>
     );
