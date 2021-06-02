@@ -31,6 +31,19 @@ class App extends React.Component {
       });
   }
 
+  //   componentDidUpdate(prevState) {
+  //     if (prevState.user !== this.state.user) {
+  //       axios
+  //         .get(`https://api.github.com/users/${this.state.user}/followers`)
+  //         .then((res) => {
+  //           this.setState({ followers: res.data });
+  //         })
+  //         .catch((err) => {
+  //           console.log(err);
+  //         });
+  //     }
+  //   }
+
   handleChange = (e) => {
     this.setState({ user: e.target.value });
   };
