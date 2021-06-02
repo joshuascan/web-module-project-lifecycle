@@ -6,7 +6,7 @@ import CardList from "./components/CardList";
 
 class App extends React.Component {
   state = {
-    data: [],
+    data: {},
     followers: [],
     user: "",
   };
@@ -31,18 +31,18 @@ class App extends React.Component {
       });
   }
 
-  //   componentDidUpdate(prevState) {
-  //     if (prevState.user !== this.state.user) {
-  //       axios
-  //         .get(`https://api.github.com/users/${this.state.user}/followers`)
-  //         .then((res) => {
-  //           this.setState({ followers: res.data });
-  //         })
-  //         .catch((err) => {
-  //           console.log(err);
-  //         });
-  //     }
-  //   }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.data !== this.state.data) {
+      axios
+        .get(`https://api.github.com/users/${this.state.user}/followers`)
+        .then((res) => {
+          this.setState({ followers: res.data });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }
 
   handleChange = (e) => {
     this.setState({ user: e.target.value });
@@ -54,15 +54,6 @@ class App extends React.Component {
       .get(`https://api.github.com/users/${this.state.user}`)
       .then((res) => {
         this.setState({ data: res.data });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    axios
-      .get(`https://api.github.com/users/${this.state.user}/followers`)
-      .then((res) => {
-        this.setState({ followers: res.data });
       })
       .catch((err) => {
         console.log(err);
